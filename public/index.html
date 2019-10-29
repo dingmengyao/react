@@ -1,12 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <div>
+      <button onclick="store.dispatch({type:'JIA',n:1})">+</button>
+      <span id="val"></span>
+      <button onclick="store.dispatch({type:'JIAN',n:1})">-</button>
+    </div>
+  </body>
+  <script>
+    const countState = {
+      count:5
+    }
+
+    const val = document.querySelector('#val')
+
     
-</body>
+
+    // render(countState)
+    const changeState = (action) =>{
+      switch(action.type){
+        case 'JIA':
+          countState.count += action.n
+          break;
+        case 'JIAN':
+          countState.count -= action.n
+          break;
+        default:
+          break;
+      }
+    }
+
+    const createStore = (state, changeState) => {
+      const getState = ()=>state
+      const listeners = []
+      const subScribe = (listener)=>listeners.push(listener)
+      const dispatch = (action) =>{
+        changeState(action)
+        listeners.forEach(listener=>listener())
+      }
+      return{
+        getState,
+        dispatch,
+        subScribe
+      }
+    }
+    const store = createStore(countState,changeState)
+    const render = () =>{
+      val.innerHTML  = store.getState().count
+    }
+    render()
+    store.subScribe(render)
+  </script>
 </html>
