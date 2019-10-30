@@ -1,14 +1,18 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
+import Nav from './Nav'
+import { CartList } from './components'
+ 
+import store from './store'
 
-class App extends React.Component{
-    render(){
-        return <h1>这是一个react组件</h1>
-    }
-}
+window.store = store
+console.log(store)
 
 ReactDom.render(
-    <App />,
+    <div>
+        <Nav />
+        <CartList store={store} /> 
+    </div>,
     document.querySelector('#root')
 )

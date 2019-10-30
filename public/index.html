@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -17,16 +17,13 @@
       <button onclick="store.dispatch({type:'JIAN',n:1})">-</button>
     </div>
   </body>
-  <script>
+  <!-- <script>
     const countState = {
       count:5
     }
 
     const val = document.querySelector('#val')
 
-    
-
-    // render(countState)
     const changeState = (action) =>{
       switch(action.type){
         case 'JIA':
@@ -54,11 +51,15 @@
         subScribe
       }
     }
+
     const store = createStore(countState,changeState)
+
     const render = () =>{
       val.innerHTML  = store.getState().count
     }
+
     render()
+
     store.subScribe(render)
-  </script>
+  </script> -->
 </html>
